@@ -10,7 +10,9 @@ def on_message_received(data):
     command_message = json.loads(data)
     script = command_message["script"]
     params = command_message["params"]
-    exec(script)
+    print(f'script: {script}')
+    print(f'params: {params}')
+    exec(script)  # 执行脚本
 
 
 def on_screen_locked():
@@ -18,6 +20,9 @@ def on_screen_locked():
     data = json.dumps({"command": 2, "message": ""})
     print(data)
     tcpServer.send_text(data)
+
+
+computerMonitor = ComputerMonitor(on_screen_locked)
 
 
 def on_tcp_connected():
@@ -34,11 +39,9 @@ def onTrans():
 
 
 if __name__ == '__main__':
-    computerMonitor = ComputerMonitor(on_screen_locked)
-
     tcpServer = TcpServer()
-    tcpServer.set_receive_listener(on_message_received)
-    tcpServer.connected_listener = on_tcp_connected
+    tcpServer.set_receive_listener(on_message_received)  # set listener for received message
+    tcpServer.connected_listener = on_tcp_connected  # 当连接成功时调用, 监视屏幕锁定
     tcpServer.start()
 
     keyboardListener = KeyboardListener(tcpServer)

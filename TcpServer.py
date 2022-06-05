@@ -1,6 +1,5 @@
 import socket
 import threading
-import json
 
 
 def get_host_ip():
@@ -35,7 +34,7 @@ class TcpServer:
             self.clientSocket, addr = self.tcpServerSocket.accept()
             print('连接地址: ', addr)
             if self.connected_listener:
-                self.connected_listener()
+                self.connected_listener()  # 连接成功回调
             while True:
                 try:
                     head_data = self.clientSocket.recv(self.HEAD_LEN)

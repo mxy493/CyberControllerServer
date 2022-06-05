@@ -1,0 +1,1 @@
+pythonw D:\mxy\Documents\GitHub\CyberControllerServer\Controller.pyw

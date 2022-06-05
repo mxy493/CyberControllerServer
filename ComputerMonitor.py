@@ -22,10 +22,7 @@ class ComputerMonitor:
                 print("Locked.")
                 if self.callback:
                     self.callback()
-            else:
-                pass
-
-            time.sleep(1)
+            time.sleep(2)  # 可以改进
 
     def start(self):
         monitor_threading = threading.Thread(target=self.monitor, args=())
